@@ -2,13 +2,12 @@ FROM centos:7
 MAINTAINER Benjamin Doran (benjamindoran@g.harvard.edu)
 
 ## SETUP
-RUN yum update \
-  && yum upgrade \
-  && yum -y install yum-utils \
+RUN yum upgrade \
   && yum -y install https://centos7.iuscommunity.org/ius-release.rpm \
-  && yum -y install curl unzip python36u python36u-setuptools python36u-pip \
+  && yum -y install python36u python36u-pip \
   && pip3.6 install py4j pyspark \
   && adduser sparkuser \
+  && yum -y remove yum-utils ius-release epel-release \
   && yum clean all && rm -rf /var/cache/yum
 
 ## many commands below this point taken from:
@@ -18,9 +17,9 @@ RUN yum update \
 ## ENABLE PYTHON3
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
 ENV PYSPARK_PYTHON=python3.6 \
-    PYTHONHASHSEED=0 \
-    PYTHONIOENCODING=UTF-8 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+  PYTHONHASHSEED=0 \
+  PYTHONIOENCODING=UTF-8 \
+  PIP_DISABLE_PIP_VERSION_CHECK=1
 
 ## JAVA
 ARG JAVA_MAJOR_VERSION=8
