@@ -1,0 +1,7 @@
+*.py
+*.csv
+*.txt
+*.db
+*.tsv
+*.jar
+*.SCALA
