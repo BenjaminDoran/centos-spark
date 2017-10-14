@@ -2,7 +2,8 @@ FROM centos:7
 MAINTAINER Benjamin Doran (benjamindoran@g.harvard.edu)
 
 ## SETUP
-RUN yum upgrade \
+RUN yum -y upgrade \
+  && yum -y install yum-utils \
   && yum -y install https://centos7.iuscommunity.org/ius-release.rpm \
   && yum -y install python36u python36u-pip \
   && pip3.6 install py4j pyspark \
